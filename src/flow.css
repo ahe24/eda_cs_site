@@ -1,0 +1,422 @@
+/* Flow Section Container */
+.flow-section {
+    position: relative;
+    border-top: 1px solid rgba(255, 255, 255, 0.05);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+    background: radial-gradient(circle at center, #0f0f16 0%, #050508 100%);
+    overflow: hidden;
+}
+
+.flow-diagram-container {
+    position: relative;
+    width: 100%;
+    height: 400px;
+    /* Reduced specific height */
+    margin: 2rem 0;
+    display: flex;
+    align-items: center;
+}
+
+/* The Pipeline Track */
+.pipeline-track {
+    position: absolute;
+    top: 50%;
+    left: 0;
+    width: 100%;
+    height: 4px;
+    background: #1f1f2e;
+    transform: translateY(-50%);
+    z-index: 1;
+}
+
+/* Moving Data Packet */
+.data-packet {
+    position: absolute;
+    top: 50%;
+    left: 0;
+    width: 40px;
+    height: 4px;
+    background: var(--primary-color);
+    box-shadow: 0 0 15px var(--primary-color), 0 0 30px var(--primary-color);
+    transform: translateY(-50%);
+    border-radius: 2px;
+    z-index: 2;
+    animation: travel-pipeline 8s cubic-bezier(0.4, 0, 0.2, 1) infinite;
+}
+
+@keyframes travel-pipeline {
+    0% {
+        left: 0%;
+        opacity: 0;
+    }
+
+    5% {
+        opacity: 1;
+    }
+
+    95% {
+        opacity: 1;
+    }
+
+    100% {
+        left: 100%;
+        opacity: 0;
+    }
+}
+
+/* Stage Points */
+.stage-point {
+    position: absolute;
+    top: 50%;
+    width: 20px;
+    height: 20px;
+    background: #1a1a24;
+    border: 2px solid #333;
+    border-radius: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 5;
+    transition: all 0.3s ease;
+}
+
+/* Distribute stages evenly */
+.stage-1 {
+    left: 15%;
+}
+
+.stage-2 {
+    left: 38%;
+}
+
+.stage-3 {
+    left: 62%;
+}
+
+.stage-4 {
+    left: 85%;
+}
+
+/* Stage Labels (RTL Coding, etc) */
+.stage-label {
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+    white-space: nowrap;
+    font-family: var(--font-mono);
+    font-size: 0.8rem;
+    color: var(--text-muted);
+    top: -30px;
+    /* Default for bottom cards, overwritten for top */
+    opacity: 0.7;
+}
+
+.stage-point:hover {
+    background: var(--primary-color);
+    box-shadow: 0 0 20px rgba(0, 243, 255, 0.5);
+}
+
+.stage-point:hover .stage-label {
+    color: #fff;
+    opacity: 1;
+}
+
+/* Active State Animation Hook (can be timed with packet) */
+.stage-point.active {
+    background: var(--primary-color);
+    box-shadow: 0 0 30px rgba(0, 243, 255, 0.8);
+}
+
+/* Connectors */
+.tool-connector {
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 2px;
+    height: 50px;
+    background: linear-gradient(to bottom, transparent, rgba(255, 255, 255, 0.1));
+    transition: height 0.3s, background 0.3s;
+}
+
+.tool-connector.top {
+    bottom: 20px;
+    /* connect to top of dot */
+    background: linear-gradient(to top, rgba(255, 255, 255, 0.1), transparent);
+}
+
+.tool-connector.bottom {
+    top: 20px;
+    /* connect to bottom of dot */
+    background: linear-gradient(to bottom, rgba(255, 255, 255, 0.1), transparent);
+}
+
+/* Tool Cards */
+.tool-card {
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+    background: rgba(15, 15, 22, 0.9);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    padding: 1rem;
+    border-radius: 8px;
+    width: 220px;
+    text-align: center;
+    backdrop-filter: blur(5px);
+    transition: all 0.3s ease;
+    opacity: 0.6;
+}
+
+.tool-card.top {
+    bottom: 70px;
+    /* 20 dot + 50 connector */
+}
+
+.tool-card.bottom {
+    top: 70px;
+}
+
+.tool-name {
+    color: var(--secondary-color);
+    font-weight: 700;
+    margin-bottom: 0.3rem;
+    font-size: 1.1rem;
+}
+
+.tool-desc {
+    font-size: 0.85rem;
+    color: var(--text-muted);
+    line-height: 1.4;
+}
+
+/* Hover/Active Effects */
+.stage-point:hover .tool-connector {
+    background: var(--primary-color);
+    box-shadow: 0 0 10px rgba(0, 243, 255, 0.3);
+}
+
+.stage-point:hover .tool-card {
+    opacity: 1;
+    border-color: var(--primary-color);
+    transform: translateX(-50%) scale(1.05);
+    box-shadow: 0 0 30px rgba(0, 0, 0, 0.5);
+    z-index: 10;
+}
+
+/* Animation Timings for "Auto-Play" Simulation */
+/* These animations trigger on the container to simulate the packet activating stages */
+
+@keyframes pulse-stage {
+
+    0%,
+    100% {
+        background: #1a1a24;
+        box-shadow: none;
+        transform: translate(-50%, -50%) scale(1);
+    }
+
+    10%,
+    30% {
+        background: var(--primary-color);
+        box-shadow: 0 0 25px rgba(0, 243, 255, 0.8);
+        transform: translate(-50%, -50%) scale(1.2);
+    }
+}
+
+@keyframes illuminate-connector {
+
+    0%,
+    100% {
+        background: rgba(255, 255, 255, 0.05);
+    }
+
+    10%,
+    30% {
+        background: var(--primary-color);
+    }
+}
+
+@keyframes highlight-card {
+
+    0%,
+    100% {
+        opacity: 0.6;
+        border-color: rgba(255, 255, 255, 0.1);
+        transform: translateX(-50%) scale(1);
+    }
+
+    10%,
+    30% {
+        opacity: 1;
+        border-color: var(--primary-color);
+        transform: translateX(-50%) scale(1.05);
+        box-shadow: 0 0 20px rgba(0, 243, 255, 0.2);
+    }
+}
+
+/* Stagger animations matching the 8s packet travel */
+/* Packet reaches 15% at ~1.2s */
+.stage-1 {
+    animation: pulse-stage 8s infinite 1.2s;
+}
+
+.stage-1 .tool-connector {
+    animation: illuminate-connector 8s infinite 1.2s;
+}
+
+.stage-1 .tool-card {
+    animation: highlight-card 8s infinite 1.2s;
+}
+
+/* Packet reaches 38% at ~3.0s */
+.stage-2 {
+    animation: pulse-stage 8s infinite 3.0s;
+}
+
+.stage-2 .tool-connector {
+    animation: illuminate-connector 8s infinite 3.0s;
+}
+
+.stage-2 .tool-card {
+    animation: highlight-card 8s infinite 3.0s;
+}
+
+/* Packet reaches 62% at ~4.9s */
+.stage-3 {
+    animation: pulse-stage 8s infinite 4.9s;
+}
+
+.stage-3 .tool-connector {
+    animation: illuminate-connector 8s infinite 4.9s;
+}
+
+.stage-3 .tool-card {
+    animation: highlight-card 8s infinite 4.9s;
+}
+
+/* Packet reaches 85% at ~6.8s */
+.stage-4 {
+    animation: pulse-stage 8s infinite 6.8s;
+}
+
+.stage-4 .tool-connector {
+    animation: illuminate-connector 8s infinite 6.8s;
+}
+
+.stage-4 .tool-card {
+    animation: highlight-card 8s infinite 6.8s;
+}
+
+/* Responsive adjustments */
+@media (max-width: 900px) {
+    .flow-diagram-container {
+        height: auto;
+        flex-direction: column;
+        padding: 2rem 0;
+    }
+
+    .pipeline-track {
+        width: 4px;
+        height: 100%;
+        left: 20px;
+        top: 0;
+        transform: none;
+    }
+
+    .data-packet {
+        width: 4px;
+        height: 40px;
+        left: 20px;
+        transform: none;
+        animation: travel-pipeline-vertical 8s cubic-bezier(0.4, 0, 0.2, 1) infinite;
+    }
+
+    @keyframes travel-pipeline-vertical {
+        0% {
+            top: 0%;
+            opacity: 0;
+        }
+
+        5% {
+            opacity: 1;
+        }
+
+        95% {
+            opacity: 1;
+        }
+
+        100% {
+            top: 100%;
+            opacity: 0;
+        }
+    }
+
+    .stage-point {
+        position: relative;
+        top: auto;
+        left: 20px !important;
+        transform: translateX(-50%);
+        margin-bottom: 6rem;
+    }
+
+    .tool-connector {
+        width: 30px;
+        height: 2px;
+        left: 20px;
+        /* Offset from dot */
+        top: 50%;
+        transform: translateY(-50%);
+    }
+
+    .tool-connector.top,
+    .tool-connector.bottom {
+        bottom: auto;
+        top: 50%;
+        background: linear-gradient(to right, rgba(255, 255, 255, 0.1), transparent);
+    }
+
+    .tool-card {
+        left: 70px;
+        top: 50%;
+        transform: translateY(-50%);
+        width: calc(100% - 100px);
+        text-align: left;
+    }
+
+    .tool-card.top,
+    .tool-card.bottom {
+        top: 50%;
+        bottom: auto;
+    }
+
+    /* Reset complex animations for mobile simplicity if needed, or adjust transforms */
+    @keyframes highlight-card-mobile {
+
+        0%,
+        100% {
+            opacity: 0.6;
+            border-color: rgba(255, 255, 255, 0.1);
+            transform: translateY(-50%) scale(1);
+        }
+
+        10%,
+        30% {
+            opacity: 1;
+            border-color: var(--primary-color);
+            transform: translateY(-50%) scale(1.05);
+        }
+    }
+
+    .stage-1 .tool-card {
+        animation-name: highlight-card-mobile;
+    }
+
+    .stage-2 .tool-card {
+        animation-name: highlight-card-mobile;
+    }
+
+    .stage-3 .tool-card {
+        animation-name: highlight-card-mobile;
+    }
+
+    .stage-4 .tool-card {
+        animation-name: highlight-card-mobile;
+    }
+}

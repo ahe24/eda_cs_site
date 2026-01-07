@@ -1,0 +1,245 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <link rel="icon" type="image/svg+xml" href="/vite.svg" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Formal-Based FPGA V&V</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;800&family=Space+Mono:wght@400;700&display=swap"
+    rel="stylesheet">
+</head>
+
+<body>
+  <div id="app">
+    <header class="site-header">
+      <nav>
+        <div class="logo">EDM<span class="highlight">FG</span></div>
+        <ul>
+          <li><a href="#hero" data-i18n="nav_home">Home</a></li>
+          <li><a href="#drivers" data-i18n="nav_drivers">Drivers</a></li>
+          <li><a href="#design-flow" data-i18n="nav_workflow">Workflow</a></li>
+          <li><a href="#comparison" data-i18n="nav_comparison">Formal vs Sim</a></li>
+          <li><a href="#solutions" data-i18n="nav_solutions">Solutions</a></li>
+          <li><a href="#contact" data-i18n="nav_contact">Contact</a></li>
+          <li><button id="lang-toggle" class="lang-btn">🇰🇷 \ 🇺🇸</button></li>
+        </ul>
+      </nav>
+    </header>
+
+    <main>
+      <section id="hero" class="hero-section">
+        <div class="hero-content">
+          <p class="eyebrow" data-i18n="eyebrow">Siemens EDA Solutions</p>
+          <h1 class="glitch" data-text="FORMAL-BASED FPGA V&V" data-i18n="hero_title">FORMAL-BASED<br>FPGA DESIGN
+            &<br>VERIFICATION</h1>
+          <p class="subtitle" data-i18n="hero_subtitle">Exhaustive mathematical proof for Safety-Critical &
+            Mission-Critical Designs.</p>
+          <div class="cta-group">
+            <a href="#solutions" class="btn primary" data-i18n="cta_explore">Explore Solutions</a>
+            <a href="#comparison" class="btn secondary" data-i18n="cta_why">Why Formal?</a>
+          </div>
+        </div>
+        <div class="hero-visual">
+          <canvas id="hero-canvas"></canvas>
+        </div>
+      </section>
+
+      <section id="drivers" class="bento-grid-section">
+        <div class="section-header">
+          <h2 data-i18n="drivers_title">What's Driving This?</h2>
+          <p data-i18n="drivers_desc">The demand for perfection in modern electronics.</p>
+        </div>
+        <div class="grid-container">
+          <div class="card card-large">
+            <h3 data-i18n="card_safety_title">Safety & Mission Critical</h3>
+            <p data-i18n="card_safety_desc">Mandatory for standards like DO-254 (Airborne), ISO 26262 (Automotive), and
+              IEC 62566 (Nuclear).</p>
+            <div class="card-icon">🛡️</div>
+          </div>
+          <div class="card">
+            <h3 data-i18n="card_schedule_title">Tight Schedules</h3>
+            <p data-i18n="card_schedule_desc">Productive verification needed early. Minimize debugging time and detect
+              bugs ASAP.</p>
+            <div class="card-icon">⏱️</div>
+          </div>
+          <div class="card">
+            <h3 data-i18n="card_apps_title">Automated Apps</h3>
+            <p data-i18n="card_apps_desc">Use formal power without needing a PhD. "Push-button" formal apps for specific
+              tasks.</p>
+            <div class="card-icon">🤖</div>
+          </div>
+        </div>
+      </section>
+
+      <section id="design-flow" class="flow-section">
+        <div class="section-header">
+          <h2>The Formal-Aware Workflow</h2>
+          <p>Where to apply the right tool at the right time.</p>
+        </div>
+
+        <div class="flow-diagram-container">
+          <div class="pipeline-track"></div>
+          <div class="data-packet"></div>
+
+          <!-- Stage 1 -->
+          <div class="stage-point stage-1">
+            <div class="stage-label">RTL Coding</div>
+            <div class="tool-connector top"></div>
+            <div class="tool-card top">
+              <div class="tool-name">Questa Lint</div>
+              <div class="tool-desc">Catch syntax & style errors as you type.</div>
+            </div>
+          </div>
+
+          <!-- Stage 2 -->
+          <div class="stage-point stage-2">
+            <div class="stage-label">CDC Analysis</div>
+            <div class="tool-connector bottom"></div>
+            <div class="tool-card bottom">
+              <div class="tool-name">Questa CDC</div>
+              <div class="tool-desc">Solve clock domain crossings before sim.</div>
+            </div>
+          </div>
+
+          <!-- Stage 3 -->
+          <div class="stage-point stage-3">
+            <div class="stage-label">Block Verify</div>
+            <div class="tool-connector top"></div>
+            <div class="tool-card top">
+              <div class="tool-name">Questa AutoCheck</div>
+              <div class="tool-desc">Push-button bug hunting (Deadlock, FSM).</div>
+            </div>
+          </div>
+
+          <!-- Stage 4 -->
+          <div class="stage-point stage-4">
+            <div class="stage-label">Implementation</div>
+            <div class="tool-connector bottom"></div>
+            <div class="tool-card bottom">
+              <div class="tool-name">Questa Equivalent</div>
+              <div class="tool-desc">Verify Synthesis & P&R didn't break logic.</div>
+            </div>
+          </div>
+
+        </div>
+      </section>
+
+      <section id="comparison" class="features-section">
+        <div class="section-header">
+          <h2 data-i18n="comp_title">Simulation vs. Formal</h2>
+          <p data-i18n="comp_desc">Completing the verification puzzle.</p>
+        </div>
+
+        <div class="comparison-table">
+          <div class="comp-col">
+            <h3 data-i18n="col_static_title">Static Analysis</h3>
+            <ul>
+              <li data-i18n="col_static_li1">Finds issues that <em>might</em> exist</li>
+              <li data-i18n="col_static_li2">No testbench needed</li>
+              <li data-i18n="col_static_li3">Broad, Fast, Complete</li>
+              <li data-i18n="col_static_li4">Linting, CDC Structure</li>
+            </ul>
+          </div>
+          <div class="comp-col highlight-col">
+            <h3 data-i18n="col_formal_title">Formal Verification</h3>
+            <ul>
+              <li data-i18n="col_formal_li1">Proves issues <em>do</em> or <em>do not</em> exist</li>
+              <li data-i18n="col_formal_li2">No testbench needed</li>
+              <li data-i18n="col_formal_li3">Exhaustive Mathematical Proof</li>
+              <li data-i18n="col_formal_li4">Property Checking, Equivalence</li>
+            </ul>
+          </div>
+          <div class="comp-col">
+            <h3 data-i18n="col_sim_title">Simulation</h3>
+            <ul>
+              <li data-i18n="col_sim_li1">Finds issues that <em>might</em> exist</li>
+              <li data-i18n="col_sim_li2"><strong>Requires</strong> Testbench</li>
+              <li data-i18n="col_sim_li3">Stimulus-driven (Linear)</li>
+              <li data-i18n="col_sim_li4">Functional Modeling</li>
+            </ul>
+          </div>
+        </div>
+      </section>
+
+      <section id="solutions" class="timeline-section">
+        <div class="section-header">
+          <h2 data-i18n="sol_title">Automated Formal Solutions</h2>
+          <p data-i18n="sol_desc">Targeting expensive, painful problems automatically.</p>
+        </div>
+
+        <div class="timeline">
+          <!-- Solution 1 -->
+          <div class="timeline-item">
+            <div class="date">Code Quality</div>
+            <div class="content">
+              <h3>Questa Lint</h3>
+              <p data-i18n="sol_lint_desc">Syntactic, Structural, Semantic, and Stylistic checks. Identify holes in the
+                code before simulation
+                begins. Ensures RTL is re-usable and industry-compliant.</p>
+              <img src="/src/lint-demo.png" class="solution-img" alt="Questa Lint Demo">
+            </div>
+          </div>
+
+          <!-- Solution 2 -->
+          <div class="timeline-item">
+            <div class="date">Reachability</div>
+            <div class="content">
+              <h3>Questa Inspect (AutoCheck)</h3>
+              <p data-i18n="sol_inspect_desc">"Push-button Formal". Automatically finds deadlocks, livelocks, FSM
+                unreachable states, potential
+                overflows, and bus contention without user assertions.</p>
+              <img src="/src/inspect-demo.png" class="solution-img" alt="Questa Inspect Demo">
+            </div>
+          </div>
+
+          <!-- Solution 3 -->
+          <div class="timeline-item">
+            <div class="date">Clock Domains</div>
+            <div class="content">
+              <h3>Questa CDC</h3>
+              <p data-i18n="sol_cdc_desc">Comprehensive Clock-Domain Crossing verification. Identifies synchronization
+                errors, protocol
+                violations, and reconvergence issues that simulation misses.</p>
+              <img src="/src/cdc-demo.png" class="solution-img" alt="Questa CDC Demo">
+            </div>
+          </div>
+
+          <!-- Solution 4 -->
+          <div class="timeline-item">
+            <div class="date">Equivalence</div>
+            <div class="content">
+              <h3>Questa Equivalent FPGA (OneSpin)</h3>
+              <p data-i18n="sol_eq_desc">Absolute assurance from RTL to Netlist. Verifies that synthesis and
+                Place-and-Route (P&R) optimizations
+                (pipelining, retiming, duplication) preserved logic functionality.</p>
+              <img src="/src/eq-demo.png" class="solution-img" alt="Questa Equivalent Demo">
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section id="contact" class="contact-section">
+        <h2 data-i18n="contact_title">Get in Touch</h2>
+        <p>Published by <strong>EDMFG</strong></p>
+        <div class="contact-card">
+          <p><strong>Changseon Jo</strong></p>
+          <p>EDA Business Unit Director</p>
+          <a href="mailto:cs.jo@edmfg.com" class="email-link">cs.jo@edmfg.com</a>
+        </div>
+      </section>
+
+    </main>
+
+    <footer>
+      <p data-i18n="footer_text">&copy; 2025 EDMFG. Based on Formal-Based Applications for FPGA Design & Verification.
+      </p>
+    </footer>
+  </div>
+  <script type="module" src="/src/main.js"></script>
+</body>
+
+</html>
